@@ -28,20 +28,26 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitWhile(() => MurrSource.isPlaying);
 
         gameObject.GetComponent<AudioSource>().PlayOneShot(MurrClip);
-
         yield return new WaitForSeconds(1);
+        StopCoroutine(Murr());
+        
 
 
     }
 
 	// Update is called once per frame
+    public void OnTriggerExit()
+    {
+        MurrSource.enabled = false;
+    }
 	public void Update () {
         
         float distance = Vector3.Distance(target.position, transform.position);
         if(distance <= LookRadius)
         {
+            MurrSource.enabled = true;
             StartCoroutine(Murr());
-
+            
             agent.SetDestination(target.position);
             
             if (distance <= agent.stoppingDistance)
@@ -52,7 +58,7 @@ public class EnemyController : MonoBehaviour {
         }
         else
         {
-            StopCoroutine(Murr());
+            
         }
 	}
     void FaceTarget()

@@ -8,7 +8,7 @@ public class TestCart : MonoBehaviour {
     public GameObject Tire2;
     public GameObject Tire3;
     public GameObject tire4;
-
+    public GameObject PlayerTempLocation;
     public float Smooth;
     public float Speed;
     public float HighSpeed;
@@ -64,7 +64,7 @@ public class TestCart : MonoBehaviour {
         if (InCarCurrently == true)
         {
 
-            FPSMovement.transform.position = ThisTestCrat.transform.position + new Vector3(0 , 2 ,0);
+            FPSMovement.transform.position = PlayerTempLocation.transform.position;
 
 
             if (Input.GetKey(KeyCode.G))
