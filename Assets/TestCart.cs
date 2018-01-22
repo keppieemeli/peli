@@ -61,6 +61,7 @@ public class TestCart : MonoBehaviour {
     }
     // Update is called once per frame
     void Update() {
+
         if (InCarCurrently == true)
         {
 
