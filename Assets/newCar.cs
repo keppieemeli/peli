@@ -14,7 +14,7 @@ public class newCar : MonoBehaviour {
     private float maxDis = 7f;
     public GameObject CameraPath;
     public GameObject FPSHuman;
-    
+    public GameObject FPSController;
     public Transform PlayerCam;
     public GameObject PlayerTemplocation;
     public float CurrentSpeed;
@@ -31,6 +31,7 @@ public class newCar : MonoBehaviour {
         ThisCar.GetComponent<CarAudio>().enabled = false;
         ThisCar.GetComponent<CarUserControl>().enabled = false;
         CameraPath.SetActive(false);
+        FPSController.SetActive(true);
         PlayerCam = Camera.main.transform;
         CurrentSpeedText.color = Color.black;
 
@@ -67,8 +68,10 @@ public class newCar : MonoBehaviour {
             ThisCar.GetComponent<CarAudio>().enabled = false;
             ThisCar.GetComponent<CarUserControl>().enabled = false;
             FPSHuman.SetActive(true);
+            
             CameraPath.SetActive(false);
             Incar = false;
+            FPSController.SetActive(true);
             FPSHuman.transform.position = ActualCarSomething.transform.position + new Vector3(0, 5, 0);
         }
         
@@ -85,8 +88,10 @@ public class newCar : MonoBehaviour {
                 ThisCar.GetComponent<CarAudio>().enabled = true;
                 ThisCar.GetComponent<CarUserControl>().enabled = true;
                 CameraPath.SetActive(true);
-                FPSHuman.transform.position = PlayerTemplocation.transform.position;
+                FPSController.transform.position = PlayerTemplocation.transform.position;
                 FPSHuman.SetActive(false);
+                FPSController.SetActive(false);
+
             }
         }
         if (Input.GetKeyDown(KeyCode.G) && Incar == true)
@@ -99,7 +104,8 @@ public class newCar : MonoBehaviour {
 
             
             Incar = false;
-            FPSHuman.transform.position = ThisCar.transform.position + new Vector3(0, 5, 0);
+            PlayerTemplocation.transform.position = ThisCar.transform.position;
+            FPSController.transform.position = ThisCar.transform.position;
         }
         if (Incar == true)
         {
