@@ -9,6 +9,7 @@ public class newCar : MonoBehaviour {
     public GameObject ThisCar;
     public GameObject ActualCarSomething;
     public bool Incar;
+    public GameObject CarExit;
     public bool InCarRange;
     private float distance;
     private float maxDis = 7f;
@@ -88,7 +89,7 @@ public class newCar : MonoBehaviour {
                 ThisCar.GetComponent<CarAudio>().enabled = true;
                 ThisCar.GetComponent<CarUserControl>().enabled = true;
                 CameraPath.SetActive(true);
-                FPSController.transform.position = PlayerTemplocation.transform.position;
+                
                 FPSHuman.SetActive(false);
                 FPSController.SetActive(false);
 
@@ -96,22 +97,23 @@ public class newCar : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.G) && Incar == true)
         {
+            FPSController.transform.position = CarExit.transform.position + new Vector3(0, 1f, 0);
+            FPSController.GetComponent<Rigidbody>().isKinematic = false;
             ThisCar.GetComponent<CarController>().enabled = false;
             ThisCar.GetComponent<CarAudio>().enabled = false;
             ThisCar.GetComponent<CarUserControl>().enabled = false;
             FPSHuman.SetActive(true);
             CameraPath.SetActive(false);
-
             
             Incar = false;
-            PlayerTemplocation.transform.position = ThisCar.transform.position;
-            FPSController.transform.position = ThisCar.transform.position;
+            
+            
         }
         if (Incar == true)
         {
 
-            
-
+            FPSController.GetComponent<Rigidbody>().isKinematic = true;
+            FPSController.transform.position = PlayerTemplocation.transform.position;
 
 
 
@@ -124,7 +126,7 @@ public class newCar : MonoBehaviour {
             ThisCar.GetComponent<CarUserControl>().enabled = false;
             FPSHuman.SetActive(true);
             CameraPath.SetActive(false);
-            FPSHuman.SetActive(true);
+            
         }
 
 
